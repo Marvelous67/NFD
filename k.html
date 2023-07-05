@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --main-color: red;
+        --text-color: blue;
+        --root-color-3: green;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <button style="background-color: var(--main-color)">vffg</button>
+    <button style="background-color: var(--main-color)">vffg</button>
+    <button style="background-color: var(--text-color)">vffg</button>
+    <button style="background-color: var(--root-color-3)">vffg</button>
+    <button onclick="Dark()">Change Root Colors</button>
+  </body>
+</html>
+<script>
+  // Apply the saved root values on page load
+  window.addEventListener("load", function () {
+    var savedRootColors = localStorage.getItem("rootColors");
+    if (savedRootColors) {
+      savedRootColors = JSON.parse(savedRootColors);
+      document.documentElement.style.setProperty(
+        "--main-color",
+        savedRootColors.color1
+      );
+      document.documentElement.style.setProperty(
+        "--text-color",
+        savedRootColors.color2
+      );
+      document.documentElement.style.setProperty(
+        "--root-color-3",
+        savedRootColors.color3
+      );
+    }
+  });
+
+  function changeRootColors() {
+    // Update the root colors
+    document.documentElement.style.setProperty("--main-color", "orange");
+    document.documentElement.style.setProperty("--text-color", "red");
+    document.documentElement.style.setProperty("--root-color-3", "yellow");
+
+    // Save the updated root values to local storage
+    var updatedRootColors = {
+      color1: "orange",
+      color2: "red",
+      color3: "yellow",
+    };
+    localStorage.setItem("rootColors", JSON.stringify(updatedRootColors));
+  }
+</script>
+<script src="./app.js"></script>
